@@ -1,33 +1,56 @@
+import { useEffect, useState } from "react";
 import {
+  Button,
+  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalFooter,
   ModalBody,
-  ModalCloseButton,
+  Input,
+  Text,
+  Box,
 } from "@chakra-ui/react";
 
-const LoginUser = () => {
+import Link from "next/link";
+
+const Login = ({ data }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [username, setUsername] = useState("");
+  console.log(username);
+  useEffect(() => {
+    onOpen();
+  }, []);
+
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader
+            borderTopRadius="md"
+            bg="#3182ce"
+            color="white"
+            fontWeight="bold"
+          >
+            Log-in
+          </ModalHeader>
           <ModalBody>
-            <Lorem count={2} />
+            <Text mb={2}>Username</Text>
+            <Input
+              placeholder="Enter your username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            ></Input>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Close
+            <Button colorScheme="blue" mr={3} onClick={() => {}}>
+              Log-in
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -35,4 +58,4 @@ const LoginUser = () => {
   );
 };
 
-export default LoginUser;
+export default Login;
